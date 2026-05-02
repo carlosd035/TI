@@ -3,15 +3,15 @@ package com.byzantander.bank.impl;
 import com.byzantander.bank.Bank;
 import com.byzantander.account.Account;
 
+import com.byzantander.exceptions.InvalidAccount;
+import com.byzantander.exceptions.NotEnoughtFunds;
+
 public class HonestBank implements Bank {
 
-    // missing import for this line
     private Map<Integer, Account>  accounts = new LinkedHashMap<>();
-    private int nextId = 0;
 
     @Override
-    public int createAccount(long initialBalance) {
-        int id = nextId++;
+    public int createAccount(int id, long initialBalance) {
         accounts.put(id, new Account(initialBalance))
     }
 

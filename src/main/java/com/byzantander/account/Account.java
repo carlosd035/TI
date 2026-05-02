@@ -2,7 +2,10 @@ package com.byzantander.account;
 
 import java.io.Serializable;
 
+import com.byzantander.exceptions.NotEnoughtFunds;
+
 class Account implements Serializable {
+    private static final long serialVersionUID = 1L;
     private long balance;
 
     public Account(long initialBalance) {

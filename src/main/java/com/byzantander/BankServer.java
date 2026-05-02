@@ -13,9 +13,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 
+import com.byzantander.bank.Bank;
+import com.byzantander.bank.impl.MaliciousBank;
+import com.byzantander.bank.impl.HonestBank;
+import com.byzantander.BankMessage;
+
 public final class BankServer extends DefaultSingleRecoverable {
 
-    // missing import
     private Bank bankState;
 
     public BankServer(int id, Bank state) {
@@ -29,7 +33,6 @@ public final class BankServer extends DefaultSingleRecoverable {
             System.exit(-1);
         }
         boolean isMalicious = args.length > 1 && args[1].equals("malicious");
-        // missing imports 
         Bank state = isMalicious ? new MaliciousBank(): new HonestBank();
 
         new BankServer(Integer.parseInt(args[0]), state);
@@ -43,6 +46,27 @@ public final class BankServer extends DefaultSingleRecoverable {
     @Override
     public byte[] appExecuteOrdered(byte[] command, MessageContext msgCtx) {
         // WIP
+        BankMessage<K, V> response = new BankMessage(command);
+        BankMessage<K, V> request = BankMessage.fromBytes(command);
+        // missing import
+        BankRequestType cmd =request.getType();
+
+        // implement
+        // para bankState.createAccount preciso de enviar msgCtx.getSequence() que será o meu id
+        // depois para os outros métodos farei
+        // int to = dis.readInt();
+        // int from = dis.readInt();
+        // long amount = dis.readLong();
+
+        // if cmd = CREATE_ACCOUNT:
+        // int id = msgCtx.getSequence();
+        // bankState.createAccount(id, amount);
+        // response.setType(CREATE_ACCOUNT_REPLY);
+        // response.setAccountId(id);
+        // return BankMessage.toByts(response);
+        // else if cmd = ...
+        // ...
+        
     }
 
     @SuppressWarnings("unchecked")
